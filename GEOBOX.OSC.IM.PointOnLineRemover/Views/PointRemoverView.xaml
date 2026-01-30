@@ -145,21 +145,25 @@
                 </ListView>
             </GroupBox>
             <GroupBox x:Name="FeatureClassSelectGroupBox"
-                Header="Verfügbare Objekt-Klassen in der Fachschale:" Grid.Row="2" Grid.Column="3" Grid.RowSpan="1">
+                Header="Verfügbare Objektklassen in der Fachschale:" Grid.Row="2" Grid.Column="3" Grid.RowSpan="1">
                 <Grid x:Name="FeatureClassSelectGrid1">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
-                    <ListView x:Name="AvailableFeatureClassesListBox" ItemsSource="{Binding FeatureClassList}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
-                                    <CheckBox x:Name="isEntryCheckedCheckBox" IsChecked="{Binding Selected, Mode=TwoWay}" IsEnabled="True" />
-                                    <Label x:Name="fClassNameLabel" Content="{Binding Caption}" HorizontalAlignment="Left" Padding="10,0,0,0"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+                    <ListView x:Name="AvailableFeatureClassesListBox" ItemsSource="{Binding FeatureClassDetails}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False">
+                                <GridViewColumn Width="30">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding DisplayName}" Header="Objektklasse" Width="350"/>
+                            </GridView>
+                        </ListView.View>
                     </ListView>
                     <Button x:Name="SelectAllFeatureClassesButton" Content="Alle Auswählen" HorizontalAlignment="Left" Grid.Row="1" Width="150" VerticalAlignment="Center" Height="25" Click="SelectAllFeatureClassesButton_Click"/>
                     <Button x:Name="DeselectAlFeatureClasseslButton" Content="Auswahl aufheben" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25" Click="DeselectAlFeatureClasseslButton_Click"/>

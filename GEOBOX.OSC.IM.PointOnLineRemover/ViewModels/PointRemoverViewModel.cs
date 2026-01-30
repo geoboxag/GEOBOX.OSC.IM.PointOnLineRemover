@@ -1,9 +1,12 @@
 ﻿using Autodesk.Map.IM.Forms;
 using GEOBOX.OSC.Common.Logging;
+using GEOBOX.OSC.IM.PointOnLineRemover.Controllers;
 using GEOBOX.OSC.IM.PointOnLineRemover.Coordinates;
+using GEOBOX.OSC.IM.PointOnLineRemover.Domain;
 using GEOBOX.OSC.IM.PointOnLineRemover.Properties;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -16,19 +19,10 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
     {
         private Document document;
 
-        private List<Coordinate> coordinateList;
-        public List<Coordinate> CoordinateList
-        {
-            set
-            {
-                coordinateList = value;
-                OnPropertyChanged("CoordinateList");
-            }
-            get
-            {
-                return coordinateList;
-            }
-        }
+        public ObservableCollection<PointCoordinateDetail> PointCoordinateDetails { get; set; }
+
+        public ObservableCollection<FeatureClassDetail> FeatureClassDetails { get; set; }
+        
 
         private string coordinateFilePath;
         public string CoordinateFilePath
@@ -110,9 +104,11 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             // >> Später wird eine Funktion erstellt, die nur die Punkte zeichnet > für die Prüfung durch den Benutzenden
 
             // 2. Punkte in den entsprechenden Objektklassen entfernen
+            // Prio 1
             // >> Linien Objektklassen => Koordinaten als Stützpunkte entfernen (wenn Linienanfangspunkt oder Linienendpunkt, dann nichts machen und eine Logmeldung ausgeben:
             // Meldung: WRN: Koordinate [X/Y] ist auf der Linie [FID der Linie] in der Objektklasse [FeatureClass-Caption] ein Anfangs- oder Endpunkt. Die Linie wurde nicht geändert.
             // Bei erfoglreichem entfernen: INF: Koordinate [X/Y] wurde auf der Linie [FID der Linie] in der Objektklasse [FeatureClass-Caption] als Stützpukt entfernt.
+            // Prio 2
             // >> Punkt Objektklassen => Punkte entfernen (es werden keine Linien gesucht und geändert, nur der Punkt gelöscht)
             // Bei erfoglreichem entfernen: INF: Koordinate [X/Y] wurde als Punkt [FID des Punktes] in der Objektklasse [FeatureClass-Caption] entfernt.
 
@@ -131,6 +127,8 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
 
         public void ChooseCoordinateFile()
         {
+            CreateSampleJson();
+
             using (var openFileDialog = 
                 new OpenFileDialog
                 {
@@ -201,19 +199,37 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
         }
         #endregion Logger
 
+        #region Feature Classes
         private void LoadFeatureClasses()
         {
-            //var exportConfigFeatureClasses = new ObservableCollection<ExportConfigFeatureClass>();
-            //FeatureClasses featureClasses = document.Connection.FeatureClasses;
-            //foreach (FeatureClass featureClass in featureClasses)
-            //{
-            //    exportConfigFeatureClasses.Add(new ExportConfigFeatureClass(featureClass));
-            //}
+            var featureClassController = new FeatureClassController(document);
 
-            //FeatureClassList = exportConfigFeatureClasses.OrderBy(f => f.Caption).ToList();
+            FeatureClassDetails = new ObservableCollection<FeatureClassDetail>();
+
+            foreach (FeatureClassDetail featureClassDetail in featureClassController.GetFeatureClasses())
+            {
+                FeatureClassDetails.Add(featureClassDetail);
+            }
         }
 
+        public void SelectAllFeatureClasses()
+        {
+            ChangeAllChechedOnFeatureClasses(true);
+        }
 
+        public void DeselectAllFeatureClasses()
+        {
+            ChangeAllChechedOnFeatureClasses(false);
+        }
+
+        private void ChangeAllChechedOnFeatureClasses(bool selected)
+        {
+            foreach (var fcDetail in FeatureClassDetails)
+            {
+                fcDetail.IsSelected = selected;
+            }
+        }
+        #endregion Feature Classes
 
 
         #region is ready
@@ -223,11 +239,8 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
         /// </summary>
         private void CheckIsReadyForRemove()
         {
-            if (CoordinateList == null || CoordinateList.Count == 0)
-            {
-                IsReadyForRemove = true;
-                return;
-            }
+            // ToDo: Check selected Feature Classes
+            // ToDo: Check has coordinates 
 
             if (string.IsNullOrEmpty(LogFilePath))
             {
@@ -259,7 +272,8 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             col.AddCoordinate(new Coordinate("260102", 2660250, 1252610.768));
             col.AddCoordinate(new Coordinate("260103", 2660250.232, 1251438.785));
 
-            JsonSerializer.Serialize
+            var content = JsonSerializer.Serialize<CoordinateCollection>(col);
+            File.WriteAllText("C:\\Temp\\test.json", content);
         }
         #endregion
     }

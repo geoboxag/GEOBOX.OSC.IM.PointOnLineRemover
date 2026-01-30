@@ -57,12 +57,12 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Views
 
         private void SelectAllFeatureClassesButton_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: not implemented
+            pointRemoverViewModel.SelectAllFeatureClasses();
         }
 
         private void DeselectAlFeatureClasseslButton_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: not implemented
+            pointRemoverViewModel.DeselectAllFeatureClasses();
         }
     }
 }
