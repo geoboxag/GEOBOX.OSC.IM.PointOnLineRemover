@@ -84,7 +84,14 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
         public PointRemoverViewModel(Document document)
         {
             this.document = document;
+
+            PointCoordinateDetails = new ObservableCollection<PointCoordinateDetail>();
+            FeatureClassDetails = new ObservableCollection<FeatureClassDetail>();
+
             LoadFeatureClasses();
+
+            // only for testing - create sample json file for testing or debug
+            //CreateSampleJson("C:\\Temp\\test.json");
         }
 
         public bool RemovePoints()
@@ -125,10 +132,9 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             return true;
         }
 
+        #region Coodinate Points
         public void ChooseCoordinateFile()
         {
-            CreateSampleJson();
-
             using (var openFileDialog = 
                 new OpenFileDialog
                 {
@@ -154,19 +160,48 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
         {
             if (string.IsNullOrWhiteSpace(CoordinateFilePath)) return false;
 
+            CoordinateCollection list = null;
             try
             {
                 var text = File.ReadAllText(CoordinateFilePath);
-                CoordinateCollection list = JsonSerializer.Deserialize<CoordinateCollection>(text);
+                list = JsonSerializer.Deserialize<CoordinateCollection>(text);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"{Resources.CoordnateFile_WrongContentErrorMessage} ({ex.Message})");
                 return false;
+            }
+
+            PointCoordinateDetails.Clear();
+
+            foreach (Coordinate jsonCoord in list)
+            {
+                PointCoordinateDetails.Add(new PointCoordinateDetail(jsonCoord.ID, jsonCoord.East, jsonCoord.North));
             }
 
             return true;
         }
+
+        public void SelectAllCoodinates()
+        {
+            ChangeAllChechedOnFeatureClasses(true);
+        }
+
+        public void DeselectAllCoodinates()
+        {
+            ChangeAllChechedOnFeatureClasses(false);
+        }
+
+        private void ChangeAllChechedOnCoodinates(bool selected)
+        {
+            foreach (var coordPoint in PointCoordinateDetails)
+            {
+                coordPoint.IsSelected = selected;
+            }
+
+            CheckIsReadyForRemove();
+        }
+        #endregion Coodinate Points
 
         #region Logger
         public void ChooseLLogFileSavePath()
@@ -228,9 +263,10 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             {
                 fcDetail.IsSelected = selected;
             }
+
+            CheckIsReadyForRemove();
         }
         #endregion Feature Classes
-
 
         #region is ready
         /// <summary>
@@ -239,8 +275,17 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
         /// </summary>
         private void CheckIsReadyForRemove()
         {
-            // ToDo: Check selected Feature Classes
-            // ToDo: Check has coordinates 
+            if (!HasSelectedFeatureClasses())
+            {
+                IsReadyForRemove = false;
+                return;
+            }
+
+            if (!HasSelectedPointCoordinates())
+            {
+                IsReadyForRemove = false;
+                return;
+            }
 
             if (string.IsNullOrEmpty(LogFilePath))
             {
@@ -249,6 +294,30 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             }
 
             IsReadyForRemove = true;
+        }
+
+        private bool HasSelectedFeatureClasses()
+        {
+            if (FeatureClassDetails == null) return false;
+
+            foreach(var fcDetail in FeatureClassDetails)
+            {
+                if (fcDetail.IsSelected == true) return true;
+            }
+
+            return false;
+        }
+
+        private bool HasSelectedPointCoordinates()
+        {
+            if (PointCoordinateDetails == null) return false;
+
+            foreach (var pointCoord in PointCoordinateDetails)
+            {
+                if (pointCoord.IsSelected == true) return true;
+            }
+
+            return false;
         }
         #endregion is ready
 
@@ -264,8 +333,11 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
         #endregion Property Changed Handler
 
 
-        #region Sample Data
-        private void CreateSampleJson()
+        #region Sample Data 
+        /// <summary>
+        /// Create Sample Data for debug and testing
+        /// </summary>
+        private void CreateSampleJson(string pathToJsonFile)
         {
             CoordinateCollection col = new CoordinateCollection();
             col.AddCoordinate(new Coordinate("260101", 2652300.094, 1260057.89));
@@ -273,7 +345,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             col.AddCoordinate(new Coordinate("260103", 2660250.232, 1251438.785));
 
             var content = JsonSerializer.Serialize<CoordinateCollection>(col);
-            File.WriteAllText("C:\\Temp\\test.json", content);
+            File.WriteAllText(pathToJsonFile, content);
         }
         #endregion
     }

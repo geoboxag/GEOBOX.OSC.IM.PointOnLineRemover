@@ -10,6 +10,23 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Domain
 {
     public class PointCoordinateDetail : INotifyPropertyChanged, IDisposable
     {
+        private bool isSelected = false;
+        /// <summary>
+        /// Feature Class is selected for remove points
+        /// </summary>
+        public bool IsSelected
+        {
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+            get
+            {
+                return isSelected;
+            }
+        }
+
         private string id;
         /// <summary>
         /// Point identifaction
@@ -63,6 +80,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Domain
 
         public PointCoordinateDetail(string id, double east, double north)
         {
+            IsSelected = true;
             ID = id;
             East = east;
             North = north;

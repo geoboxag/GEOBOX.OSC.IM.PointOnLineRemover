@@ -113,8 +113,7 @@
               Grid.Row="1"
               Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12.027" />
-                <ColumnDefinition Width="637.973"/>
+                <ColumnDefinition Width="650" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -126,7 +125,7 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <GroupBox x:Name="CoordinateFileSelect"
-                      Header="Koordinatendatei auswählen:" Grid.ColumnSpan="2">
+                      Header="Koordinatendatei auswählen:">
                 <DockPanel>
                     <TextBox x:Name="CoordinateFilePathTextbox" IsEnabled="False" Text="{Binding CoordinateFilePath}" Margin="0,0,10,0" Width="590" />
                     <Button x:Name="ChooseCoordinateFilePathButton" Content="..." HorizontalAlignment="Right" DockPanel.Dock="Right" Click="ChooseCoordinateFilePathButton_Click" Width="25" />
@@ -134,19 +133,36 @@
             </GroupBox>
 
             <GroupBox x:Name="CoordinatesListGroupBox"
-                      Header="Koordinaten der Punkte:" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                <ListView x:Name="CoordinatesListBox" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Grid x:Name="FeatureClassSelectGrid" Width="638">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </ListView>
+                      Header="Koordinaten der Punkte:" Grid.Row="2" Grid.Column="0">
+                <Grid x:Name="CoordinatesListGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="CoordinatesListBox" ItemsSource="{Binding PointCoordinateDetails}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False">
+                                <GridViewColumn Width="30">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="150"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding East}" Header="E/Y Wert" Width="150"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding North}" Header="N/X Wert" Width="150"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button x:Name="SelectAllCoodinatesButton" Content="Alle Auswählen" HorizontalAlignment="Left" Grid.Row="1" Width="150" VerticalAlignment="Center" Height="25" Click="SelectAllCoodinatesButton_Click"/>
+                    <Button x:Name="DeselectAllCoodinatesButton" Content="Auswahl aufheben" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25" Click="DeselectAllCoodinatesButton_Click"/>
+                </Grid>
             </GroupBox>
+
             <GroupBox x:Name="FeatureClassSelectGroupBox"
-                Header="Verfügbare Objektklassen in der Fachschale:" Grid.Row="2" Grid.Column="3" Grid.RowSpan="1">
-                <Grid x:Name="FeatureClassSelectGrid1">
+                Header="Verfügbare Objektklassen in der Fachschale:" Grid.Row="2" Grid.Column="2">
+                <Grid x:Name="FeatureClassSelectGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="30"/>
@@ -166,13 +182,13 @@
                         </ListView.View>
                     </ListView>
                     <Button x:Name="SelectAllFeatureClassesButton" Content="Alle Auswählen" HorizontalAlignment="Left" Grid.Row="1" Width="150" VerticalAlignment="Center" Height="25" Click="SelectAllFeatureClassesButton_Click"/>
-                    <Button x:Name="DeselectAlFeatureClasseslButton" Content="Auswahl aufheben" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25" Click="DeselectAlFeatureClasseslButton_Click"/>
+                    <Button x:Name="DeselectAllFeatureClassesButton" Content="Auswahl aufheben" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Height="25" Click="DeselectAllFeatureClassesButton_Click"/>
                 </Grid>
             </GroupBox>
 
-            <Button x:Name="RemovePointsButton" Content="Punkte entfernen..." Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Click="RemovePointsButton_Click" Grid.Row="4" Height="26" Margin="250,0,0,0"/>
+            <Button x:Name="RemovePointsButton" Content="Punkte entfernen..." Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" IsEnabled="{Binding IsReadyForRemove}" Click="RemovePointsButton_Click" Grid.Row="4" Height="26" Margin="250,0,0,0"/>
             <GroupBox x:Name="LogFileSelect"
-                Header="Protokolldatei auswählen:" Grid.Row="4" Grid.ColumnSpan="2">
+                Header="Protokolldatei auswählen:" Grid.Row="4">
                 <DockPanel>
                     <TextBox x:Name="LogFilePathTextbox" IsEnabled="False" Text="{Binding LogFilePath}" Margin="0,0,10,0" Width="590" />
                     <Button x:Name="ChooseLogFilePathButton" Content="..." HorizontalAlignment="Right" DockPanel.Dock="Right" Click="ChooseLogFilePathButton_Click" Width="25" />

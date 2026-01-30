@@ -60,9 +60,19 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Views
             pointRemoverViewModel.SelectAllFeatureClasses();
         }
 
-        private void DeselectAlFeatureClasseslButton_Click(object sender, RoutedEventArgs e)
+        private void DeselectAllFeatureClassesButton_Click(object sender, RoutedEventArgs e)
         {
             pointRemoverViewModel.DeselectAllFeatureClasses();
+        }
+
+        private void SelectAllCoodinatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            pointRemoverViewModel.SelectAllCoodinates();
+        }
+
+        private void DeselectAllCoodinatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            pointRemoverViewModel.DeselectAllCoodinates();
         }
     }
 }

@@ -79,6 +79,15 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Der JSON-Inhalt konnte nicht korrekt gelesen werden..
+        /// </summary>
+        internal static string CoordnateFile_WrongContentErrorMessage {
+            get {
+                return ResourceManager.GetString("CoordnateFile_WrongContentErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gefilterte Objekte zur Liste hinzufügen.
         /// </summary>
         internal static string DlgPlugIn_AddFilterToListMenuTitle {

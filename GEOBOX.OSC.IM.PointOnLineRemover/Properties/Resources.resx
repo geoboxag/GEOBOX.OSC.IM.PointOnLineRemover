@@ -165,4 +165,7 @@
   <data name="LoggerComment" xml:space="preserve">
     <value>Tool um Stützpunkte und Punkte anhand einer Koordinate zu entfernen.</value>
   </data>
+  <data name="CoordnateFile_WrongContentErrorMessage" xml:space="preserve">
+    <value>Der JSON-Inhalt konnte nicht korrekt gelesen werden.</value>
+  </data>
 </root>
