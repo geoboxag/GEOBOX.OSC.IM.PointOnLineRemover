@@ -2,22 +2,32 @@
 
 namespace GEOBOX.OSC.IM.PointOnLineRemover.Coordinates
 {
-    public class CoordinateCollection
+    /// <summary>
+    /// List with Coordinate Objects
+    /// </summary>
+    public class CoordinateCollection : List<Coordinate>
     {
-        private List<Coordinate> coordinateCollection = new List<Coordinate>();
+        /// <summary>
+        /// Empty Constructor - using only for JsonSerializer.Deserialize
+        /// </summary>
+        public CoordinateCollection() { }
 
-        public CoordinateCollection()
-        {
-        }
-
+        /// <summary>
+        /// Add single coordinate to list
+        /// </summary>
+        /// <param name="coordinate"></param>
         public void AddCoordinate(Coordinate coordinate)
         {
-            coordinateCollection.Add(coordinate);
+            this.Add(coordinate);
         }
 
+        /// <summary>
+        /// Add multible coordiantes to list
+        /// </summary>
+        /// <param name="coordinateList"></param>
         public void AddCoordianteList(List<Coordinate> coordinateList)
         {
-            coordinateCollection.AddRange(coordinateList);
+            this.AddRange(coordinateList);
         }
     }
 }
