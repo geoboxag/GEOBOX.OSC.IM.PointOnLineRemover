@@ -8,7 +8,7 @@
 		ExecutionTargetDesktop="True"
    	ExecutionTargetWeb="False"
 		ExecutionTargetAdmin="True"
-   	DMCode=""
+   	DMCode="2.9.2"
    	Company="GEOBOX AG"
    	Author="GEOBOX Engeneering - Urs Sommerhalder"
 	/>
