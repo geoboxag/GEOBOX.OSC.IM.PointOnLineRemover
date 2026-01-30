@@ -1,0 +1,20 @@
+{
+  "profiles": {
+    "Debug-Map": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2025\\acad.exe",
+      "commandLineArgs": "/product MAP /language \"de-DE\"",
+      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2025\\UserDataCache\\"
+    },
+    "Debug-Admin": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Autodesk\\Infrastructure Administrator for AutoCAD Map 3D 2025\\bin\\Autodesk.InfrastructureAdministrator.exe",
+      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2025\\UserDataCache\\"
+    },
+    "Debug-MDEditor": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2025\\Map\\bin\\Autodesk.IndustryModelDataEditor.exe",
+      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2025\\UserDataCache\\"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PlugIn>
+
+	<Default
+		AssemblyName="GEOBOX.OSC.IM.PointOnLineRemover.dll"
+		Namespace="GEOBOX.OSC.IM.PointOnLineRemover"
+	   Priority="100"
+		ExecutionTargetDesktop="True"
+   	ExecutionTargetWeb="False"
+		ExecutionTargetAdmin="True"
+   	DMCode=""
+   	Company="GEOBOX AG"
+   	Author="GEOBOX Engeneering - Urs Sommerhalder"
+	/>
+
+  <DocumentPlugIn Namespace="GEOBOX.OSC.IM.PointOnLineRemover.DocumentPlugins" ClassName="PointOnLineRemoverDocumentPlugin" ExecutionTargetAdmin="False" />
+  
+</PlugIn>

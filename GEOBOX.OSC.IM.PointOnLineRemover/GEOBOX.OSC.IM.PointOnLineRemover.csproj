@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Platforms>x64</Platforms>
+    <Configurations>Debug;Release;Debug-Map;Debug-Admin</Configurations>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <PackageOutputPath>$(OutputPath)</PackageOutputPath>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Deterministic>False</Deterministic>
+    <OutputPath>..\..\_debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <NoWarn>1701;1702;CA1416</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Admin|x64'">
+    <Deterministic>False</Deterministic>
+    <OutputPath>..\..\..\..\Program Files\Autodesk\Infrastructure Administrator for AutoCAD Map 3D 2025\bin\</OutputPath>
+    <DebugType>full</DebugType>
+    <NoWarn>1701;1702;CA1416</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Map|x64'">
+    <Deterministic>False</Deterministic>
+    <OutputPath>..\..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\</OutputPath>
+    <DebugType>full</DebugType>
+    <NoWarn>1701;1702;CA1416</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Deterministic>False</Deterministic>
+    <OutputPath>..\..\output\</OutputPath>
+    <DebugType>none</DebugType>
+    <NoWarn>1701;1702;CA1416</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="DataModel\**" />
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="DataModel\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="DataModel\**" />
+    <None Remove="Resources\**" />
+    <Page Remove="DataModel\**" />
+    <Page Remove="Resources\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Autodesk.Map.IM.Data">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Map.IM.Forms">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Map.IM.Genuine">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Genuine.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Map.IM.Graphic">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Graphic.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\log4net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="OptionPageIli2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="OptionPageReport.cs" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="GEOBOX.IM.CH.LandCH.tbp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="GEOBOX.OSC.IM.PointOnLineRemover.tbp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+</Project>
