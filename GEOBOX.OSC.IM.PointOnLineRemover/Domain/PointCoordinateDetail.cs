@@ -10,6 +10,11 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Domain
 {
     public class PointCoordinateDetail : INotifyPropertyChanged, IDisposable
     {
+        /// <summary>
+        /// Unique object identifier. Because the point identifaction (ID) is not unique.
+        /// </summary>
+        public string UUID { get; init; }
+
         private bool isSelected = false;
         /// <summary>
         /// Feature Class is selected for remove points
@@ -80,6 +85,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Domain
 
         public PointCoordinateDetail(string id, double east, double north)
         {
+            UUID = Guid.NewGuid().ToString();
             IsSelected = true;
             ID = id;
             East = east;

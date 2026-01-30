@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Windows.Forms;
@@ -119,15 +120,19 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             // >> Punkt Objektklassen => Punkte entfernen (es werden keine Linien gesucht und geändert, nur der Punkt gelöscht)
             // Bei erfoglreichem entfernen: INF: Koordinate [X/Y] wurde als Punkt [FID des Punktes] in der Objektklasse [FeatureClass-Caption] entfernt.
 
-            
+            var selectedFeatureClasses = FeatureClassDetails.Where(elem => elem.IsSelected).Select(elem => elem.MapFeatureClass);
+            if(selectedFeatureClasses.Count() == 0)
+            {
+                document.ApplicationObject.MessageBox("Es wurden Objekt-Klassen ausgewählt!", "Objekt-Klassen wählen!", MessageBoxIcon.Information);
+                return false;
+            }
 
-            //var fcNamesToExport = featureClassList.Where(f => f.Selected).Select(f => f.Name).ToList();
+            var linePointsController = new LinePointsController(PointCoordinateDetails.ToList(), CreateNewLogger());
 
-            //if(fcNamesToExport.Count() == 0)
-            //{
-            //    document.ApplicationObject.MessageBox("Es wurden Objekt-Klassen ausgewählt!", "Objekt-Klassen wählen!", System.Windows.Forms.MessageBoxIcon.Information);
-            //    return false;
-            //}
+            foreach (var selectedFeatureClass in selectedFeatureClasses)
+            {
+                linePointsController.RemovePointsFromLines(selectedFeatureClass);
+            }
 
             return true;
         }
