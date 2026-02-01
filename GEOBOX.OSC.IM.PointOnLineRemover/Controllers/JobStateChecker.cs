@@ -31,7 +31,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
             if (job.ID == 1 || job.ID == 2) return false;
 
             // select job is not in open state
-            if (IsJobStateInOpen(job)) return false;
+            if (IsJobStateInOpen(job) == false) return false;
 
             return true;
         }
