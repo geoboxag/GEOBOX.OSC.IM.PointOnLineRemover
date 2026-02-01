@@ -152,13 +152,13 @@ Bitte zuerst ein Job im Status "in Bearbeitung" auswählen.</value>
     <value>GEOBOX Punkt Tools</value>
   </data>
   <data name="CoordinateFile_FileDialogFilter" xml:space="preserve">
-    <value>Koordinatendatei (*.json) | *.json</value>
+    <value>Koordinatendatei (*.json)|*.json</value>
   </data>
   <data name="CoordinateFile_FileDialogDefaultExt" xml:space="preserve">
     <value>.json</value>
   </data>
   <data name="LogFile_FileDialogFilter" xml:space="preserve">
-    <value>Protokolldatei (*.log) | *.log | Text-Datei (*.txt) | *.txt | Alle Dateien (*.*) | *.*</value>
+    <value>Protokolldatei (*.log)|*.log|Text-Datei (*.txt)|*.txt|Alle Dateien (*.*)|*.*</value>
   </data>
   <data name="LogFile_FileDialogDefaultExt" xml:space="preserve">
     <value>.log</value>
@@ -200,7 +200,7 @@ Bitte zuerst ein Job im Status "in Bearbeitung" auswählen.</value>
     <comment>{0} Captrion; {1} Feature Class Name</comment>
   </data>
   <data name="LogMessage_EndFeatureClass" xml:space="preserve">
-    <value>Objektklasse '{0}' [{1} es wurden {2} Objekte gefunden, {3} wurden geändert.</value>
+    <value>Objektklasse '{0}' [{1} es wurden {2} Objekte gefunden, {3} Punkte wurden geändert.</value>
     <comment>{0} Captrion; {1} Feature Class Name; {2} Count founds; {3} Count changed Objects</comment>
   </data>
 </root>

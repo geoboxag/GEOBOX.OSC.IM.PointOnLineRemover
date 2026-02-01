@@ -70,7 +70,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Koordinatendatei (*.json) | *.json.
+        ///   Looks up a localized string similar to Koordinatendatei (*.json)|*.json.
         /// </summary>
         internal static string CoordinateFile_FileDialogFilter {
             get {
@@ -161,7 +161,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protokolldatei (*.log) | *.log | Text-Datei (*.txt) | *.txt | Alle Dateien (*.*) | *.*.
+        ///   Looks up a localized string similar to Protokolldatei (*.log)|*.log|Text-Datei (*.txt)|*.txt|Alle Dateien (*.*)|*.*.
         /// </summary>
         internal static string LogFile_FileDialogFilter {
             get {
@@ -179,7 +179,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Objektklasse &apos;{0}&apos; [{1} es wurden {2} Objekte gefunden, {3} wurden geändert..
+        ///   Looks up a localized string similar to Objektklasse &apos;{0}&apos; [{1} es wurden {2} Objekte gefunden, {3} Punkte wurden geändert..
         /// </summary>
         internal static string LogMessage_EndFeatureClass {
             get {

@@ -231,7 +231,8 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
                 {
                     Filter = Resources.LogFile_FileDialogFilter,
                     FilterIndex = 1,
-                    DefaultExt = Resources.LogFile_FileDialogDefaultExt
+                    DefaultExt = Resources.LogFile_FileDialogDefaultExt,
+                    OverwritePrompt = true
                 })
             {
                 DialogResult result = saveFileDialog.ShowDialog();
@@ -247,7 +248,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
 
         private ILogger CreateNewLogger()
         {
-            ILogger logger = new CustomerFriendlyLogger(FileLogger.Create(logFilePath), true);
+            ILogger logger = new CustomerFriendlyLogger(FileLogger.Create(logFilePath, false), true);
             ((CustomerFriendlyLogger)logger).WriteHeader(Resources.genModulName, Resources.LoggerComment);
 
             return logger;
