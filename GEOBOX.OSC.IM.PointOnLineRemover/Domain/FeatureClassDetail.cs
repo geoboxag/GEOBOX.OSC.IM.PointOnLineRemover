@@ -29,6 +29,26 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Domain
             }
         }
 
+        private bool isLineFeatureClass = false;
+        /// <summary>
+        /// Feature Class - Line geometry
+        /// </summary>
+        public bool IsLineFeatureClass
+        {
+            set { isLineFeatureClass = value; }
+            get { return isLineFeatureClass; }
+        }
+
+        private bool isPointFeatureClass = false;
+        /// <summary>
+        /// Feature Class - Point geometry
+        /// </summary>
+        public bool IsPointFeatureClass
+        {
+            set { isPointFeatureClass = value; }
+            get { return isPointFeatureClass; }
+        }
+
         private string displayName = "unbekannt (unknow)";
         /// <summary>
         /// Name for view in list on UI
@@ -46,10 +66,25 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Domain
             }
         }
 
+        private FeatureClass mapFeatureClass;
         /// <summary>
         /// MAP.API instance for FeatureClass
         /// </summary>
-        public FeatureClass MapFeatureClass { get; set; }
+        public FeatureClass MapFeatureClass {
+            set
+            {
+                mapFeatureClass = value;
+                if (mapFeatureClass != null)
+                {
+                    if (mapFeatureClass.Type == FeatureClassType.Point) { IsPointFeatureClass = true; }
+                    else if (mapFeatureClass.Type == FeatureClassType.LineString) { IsLineFeatureClass = true; }
+                }
+            }
+            get
+            {
+                return mapFeatureClass;
+            }
+        }
 
 
         /// <summary>

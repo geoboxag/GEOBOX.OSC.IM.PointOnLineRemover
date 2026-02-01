@@ -88,56 +88,12 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gefilterte Objekte zur Liste hinzufügen.
+        ///   Looks up a localized string similar to Es ist ein kein Job oder ein ungültiger Job für die Ausführung aktiv.
+        ///Bitte zuerst ein Job im Status &quot;in Bearbeitung&quot; auswählen..
         /// </summary>
-        internal static string DlgPlugIn_AddFilterToListMenuTitle {
+        internal static string DocumentPlugIn_JobIsNotReadyMessage {
             get {
-                return ResourceManager.GetString("DlgPlugIn_AddFilterToListMenuTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Objekt zur Liste hinzufügen.
-        /// </summary>
-        internal static string DlgPlugIn_AddObjectToListMenuTitle {
-            get {
-                return ResourceManager.GetString("DlgPlugIn_AddObjectToListMenuTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Das Objekt wurde zur Liste hinzugefügt..
-        /// </summary>
-        internal static string DlgPlugIn_FeatureAddedToListMessage {
-            get {
-                return ResourceManager.GetString("DlgPlugIn_FeatureAddedToListMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Die Objekte wurden zur Liste hinzugefügt..
-        /// </summary>
-        internal static string DlgPlugIn_FeaturesAddedToListMessage {
-            get {
-                return ResourceManager.GetString("DlgPlugIn_FeaturesAddedToListMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to KML-Export.
-        /// </summary>
-        internal static string DlgPlugIn_KMLMenuTitle {
-            get {
-                return ResourceManager.GetString("DlgPlugIn_KMLMenuTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Öffne Liste.
-        /// </summary>
-        internal static string DlgPlugIn_OpenListTableMenuTitle {
-            get {
-                return ResourceManager.GetString("DlgPlugIn_OpenListTableMenuTitle", resourceCulture);
+                return ResourceManager.GetString("DocumentPlugIn_JobIsNotReadyMessage", resourceCulture);
             }
         }
         
@@ -169,6 +125,33 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Koordinate [{0}/{1}] ist der Endpunkt der Linie [{2}]. Die Linie wurde nicht geändert..
+        /// </summary>
+        internal static string LinePoint_EndPoint_Message {
+            get {
+                return ResourceManager.GetString("LinePoint_EndPoint_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordinate [{0}/{1}] ist der Startpunkt der Linie [{2}]. Die Linie wurde nicht geändert..
+        /// </summary>
+        internal static string LinePoint_StartPoint_Message {
+            get {
+                return ResourceManager.GetString("LinePoint_StartPoint_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koordinate [{0}/{1}] wurde als Stützpunkt aus der Linie [{2}] entfernt..
+        /// </summary>
+        internal static string LinePoint_SuccesRemoved_Message {
+            get {
+                return ResourceManager.GetString("LinePoint_SuccesRemoved_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .log.
         /// </summary>
         internal static string LogFile_FileDialogDefaultExt {
@@ -196,6 +179,88 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Objektklasse &apos;{0}&apos; [{1} es wurden {2} Objekte gefunden, {3} wurden geändert..
+        /// </summary>
+        internal static string LogMessage_EndFeatureClass {
+            get {
+                return ResourceManager.GetString("LogMessage_EndFeatureClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objektklasse &apos;{0}&apos; [{1}] wird bearbeitet..
+        /// </summary>
+        internal static string LogMessage_HandleFeatureClass_Start {
+            get {
+                return ResourceManager.GetString("LogMessage_HandleFeatureClass_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es wurden keine Linien-Objektklassen für das Entfernen ausgewählt..
+        /// </summary>
+        internal static string LogMessage_NoLineClassesSelected {
+            get {
+                return ResourceManager.GetString("LogMessage_NoLineClassesSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es wurden keine Punkt-Objektklassen für das Entfernen ausgewählt..
+        /// </summary>
+        internal static string LogMessage_NoPointClassesSelected {
+            get {
+                return ResourceManager.GetString("LogMessage_NoPointClassesSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Koordinaten wurden aus der folgenden Datei gelesen.
+        /// </summary>
+        internal static string LogMessage_SelectedCoodianteFile {
+            get {
+                return ResourceManager.GetString("LogMessage_SelectedCoodianteFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objektklasse &apos;{0}&apos; [{1} wird bearbeitet..
+        /// </summary>
+        internal static string LogMessage_StartFeatureClass {
+            get {
+                return ResourceManager.GetString("LogMessage_StartFeatureClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starte Punkte entfernen aus Linien-Objektklassen....
+        /// </summary>
+        internal static string LogMessage_StartRemoveFromLineClasses {
+            get {
+                return ResourceManager.GetString("LogMessage_StartRemoveFromLineClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starte Punkte entfernen aus Punkt-Objektklassen....
+        /// </summary>
+        internal static string LogMessage_StartRemoveFromPointClasses {
+            get {
+                return ResourceManager.GetString("LogMessage_StartRemoveFromPointClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem beim Speichern der Objekte &apos;{0}&apos; [{1}]. Meldung:
+        ///{2}.
+        /// </summary>
+        internal static string LogMessage_UpdateFeature_Error {
+            get {
+                return ResourceManager.GetString("LogMessage_UpdateFeature_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GEOBOX Punkt Tools.
         /// </summary>
         internal static string MapContextMenue_PointToolsRoot {
@@ -210,6 +275,24 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Properties {
         internal static string MapContextMenue_RemovePointsWithList {
             get {
                 return ResourceManager.GetString("MapContextMenue_RemovePointsWithList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Punkte konnten Erfolgreich entfernt werden. Details finden Sie in der Protokolldatei..
+        /// </summary>
+        internal static string PointRemoverViewModel_RemovePointsSuccess {
+            get {
+                return ResourceManager.GetString("PointRemoverViewModel_RemovePointsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Punkte konnten nicht ohne Meldung entfernt werden. Kontrollieren Sie die Protokolldatei!.
+        /// </summary>
+        internal static string PointRemoverViewModel_RemovePointsWithWarnings {
+            get {
+                return ResourceManager.GetString("PointRemoverViewModel_RemovePointsWithWarnings", resourceCulture);
             }
         }
     }

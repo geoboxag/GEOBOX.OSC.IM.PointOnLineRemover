@@ -117,23 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DlgPlugIn_AddFilterToListMenuTitle" xml:space="preserve">
-    <value>Gefilterte Objekte zur Liste hinzufügen</value>
+  <data name="PointRemoverViewModel_RemovePointsWithWarnings" xml:space="preserve">
+    <value>Punkte konnten nicht ohne Meldung entfernt werden. Kontrollieren Sie die Protokolldatei!</value>
   </data>
-  <data name="DlgPlugIn_AddObjectToListMenuTitle" xml:space="preserve">
-    <value>Objekt zur Liste hinzufügen</value>
+  <data name="PointRemoverViewModel_RemovePointsSuccess" xml:space="preserve">
+    <value>Punkte konnten Erfolgreich entfernt werden. Details finden Sie in der Protokolldatei.</value>
   </data>
-  <data name="DlgPlugIn_FeatureAddedToListMessage" xml:space="preserve">
-    <value>Das Objekt wurde zur Liste hinzugefügt.</value>
+  <data name="DocumentPlugIn_JobIsNotReadyMessage" xml:space="preserve">
+    <value>Es ist ein kein Job oder ein ungültiger Job für die Ausführung aktiv.
+Bitte zuerst ein Job im Status "in Bearbeitung" auswählen.</value>
   </data>
-  <data name="DlgPlugIn_FeaturesAddedToListMessage" xml:space="preserve">
-    <value>Die Objekte wurden zur Liste hinzugefügt.</value>
+  <data name="LogMessage_StartRemoveFromLineClasses" xml:space="preserve">
+    <value>Starte Punkte entfernen aus Linien-Objektklassen...</value>
   </data>
-  <data name="DlgPlugIn_KMLMenuTitle" xml:space="preserve">
-    <value>KML-Export</value>
+  <data name="LogMessage_SelectedCoodianteFile" xml:space="preserve">
+    <value>Die Koordinaten wurden aus der folgenden Datei gelesen</value>
   </data>
-  <data name="DlgPlugIn_OpenListTableMenuTitle" xml:space="preserve">
-    <value>Öffne Liste</value>
+  <data name="LogMessage_NoLineClassesSelected" xml:space="preserve">
+    <value>Es wurden keine Linien-Objektklassen für das Entfernen ausgewählt.</value>
   </data>
   <data name="ExportMnuItem" xml:space="preserve">
     <value>Exportieren</value>
@@ -167,5 +168,39 @@
   </data>
   <data name="CoordnateFile_WrongContentErrorMessage" xml:space="preserve">
     <value>Der JSON-Inhalt konnte nicht korrekt gelesen werden.</value>
+  </data>
+  <data name="LogMessage_StartRemoveFromPointClasses" xml:space="preserve">
+    <value>Starte Punkte entfernen aus Punkt-Objektklassen...</value>
+  </data>
+  <data name="LogMessage_NoPointClassesSelected" xml:space="preserve">
+    <value>Es wurden keine Punkt-Objektklassen für das Entfernen ausgewählt.</value>
+  </data>
+  <data name="LinePoint_StartPoint_Message" xml:space="preserve">
+    <value>Koordinate [{0}/{1}] ist der Startpunkt der Linie [{2}]. Die Linie wurde nicht geändert.</value>
+    <comment>{0} East; {1} North; {2} Line FID</comment>
+  </data>
+  <data name="LinePoint_EndPoint_Message" xml:space="preserve">
+    <value>Koordinate [{0}/{1}] ist der Endpunkt der Linie [{2}]. Die Linie wurde nicht geändert.</value>
+    <comment>{0} East; {1} North; {2} Line FID</comment>
+  </data>
+  <data name="LinePoint_SuccesRemoved_Message" xml:space="preserve">
+    <value>Koordinate [{0}/{1}] wurde als Stützpunkt aus der Linie [{2}] entfernt.</value>
+  </data>
+  <data name="LogMessage_HandleFeatureClass_Start" xml:space="preserve">
+    <value>Objektklasse '{0}' [{1}] wird bearbeitet.</value>
+    <comment>{0} Captrion; {1} Feature Class Name</comment>
+  </data>
+  <data name="LogMessage_UpdateFeature_Error" xml:space="preserve">
+    <value>Problem beim Speichern der Objekte '{0}' [{1}]. Meldung:
+{2}</value>
+    <comment>{0} Captrion; {1} Feature Class Name: {2} Exception Message</comment>
+  </data>
+  <data name="LogMessage_StartFeatureClass" xml:space="preserve">
+    <value>Objektklasse '{0}' [{1} wird bearbeitet.</value>
+    <comment>{0} Captrion; {1} Feature Class Name</comment>
+  </data>
+  <data name="LogMessage_EndFeatureClass" xml:space="preserve">
+    <value>Objektklasse '{0}' [{1} es wurden {2} Objekte gefunden, {3} wurden geändert.</value>
+    <comment>{0} Captrion; {1} Feature Class Name; {2} Count founds; {3} Count changed Objects</comment>
   </data>
 </root>

@@ -6,7 +6,12 @@ using GEOBOX.OSC.IM.PointOnLineRemover.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography;
 using System.Text.Json;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Windows.Documents;
+using GEOBOX.OSC.IM.PointOnLineRemover.Properties;
 
 namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
 {
@@ -37,6 +42,8 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
         /// <param name="featureClass">Feature class</param>
         internal void RemovePointsFromLines(FeatureClass featureClass)
         {
+            logger.WriteInformation(String.Format(Resources.LogMessage_StartFeatureClass, featureClass.Caption, featureClass.Name));
+
             var tolerance = featureClass.Tolerance;
 
             // find the lines (FIDs) matching the points
@@ -44,6 +51,8 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
 
             // get the features
             var features = featureClass.GetFeatures(true, featuresWithPointsToRemove.Keys);
+
+            int changeCounter = 0;
 
             // loop the affected features
             foreach (var feature in features)
@@ -62,16 +71,17 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
                             {
                                 if (linePointIndex == 0) // startpoint
                                 {
-                                    logger.WriteWarning($"Point ist matching startpoint (not removed) - FID: {feature.FID}; Point-ID: {point.ID} ({point.East}/{point.North})");
+                                    logger.WriteWarning(String.Format(Resources.LinePoint_StartPoint_Message, point.East, point.North, feature.FID));
                                 }
                                 else if (linePointIndex == (lineString.Count - 1)) // endpoint
                                 {
-                                    logger.WriteWarning($"Point ist matching endpoint (not removed) - FID: {feature.FID}; Point-ID: {point.ID} ({point.East}/{point.North})");
+                                    logger.WriteWarning(String.Format(Resources.LinePoint_EndPoint_Message, point.East, point.North, feature.FID));
                                 }
                                 else
                                 {
                                     lineString.RemoveAt(linePointIndex);
-                                    logger.WriteInformation($"Point removed - Feature: {feature.FID}; Point: {point.ID}");
+                                    logger.WriteInformation(String.Format(Resources.LinePoint_SuccesRemoved_Message, point.East, point.North, feature.FID));
+                                    changeCounter++;
                                 }
 
                                 // Set the changed geometry on the feature again, otherwise change tracker seems not to be triggered
@@ -89,7 +99,16 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
                 }
             }
 
-            featureClass.UpdateFeatures(features, true);
+            try
+            {
+                featureClass.UpdateFeatures(features, true);
+            }
+            catch (Exception ex)
+            {
+                logger.WriteError(String.Format(Resources.LogMessage_UpdateFeature_Error, featureClass.Caption, featureClass.Name, ex.Message));
+            }
+
+            logger.WriteInformation(String.Format(Resources.LogMessage_EndFeatureClass, featureClass.Caption, featureClass.Name, features.Count(), changeCounter));
         }
 
         /// <summary>

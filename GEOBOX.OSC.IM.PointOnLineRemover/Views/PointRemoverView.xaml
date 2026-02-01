@@ -145,7 +145,7 @@
                                 <GridViewColumn Width="30">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Checked="CoodinatesCheckBox_Checked" Unchecked="CoodinatesCheckBox_Unchecked" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -173,7 +173,7 @@
                                 <GridViewColumn Width="30">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Checked="FeatureClassesCheckBox_Checked" Unchecked="FeatureClassesCheckBox_Unchecked"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -186,7 +186,7 @@
                 </Grid>
             </GroupBox>
 
-            <Button x:Name="RemovePointsButton" Content="Punkte entfernen..." Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" IsEnabled="{Binding IsReadyForRemove}" Click="RemovePointsButton_Click" Grid.Row="4" Height="26" Margin="250,0,0,0"/>
+            <Button x:Name="RemovePointsButton" Content="Punkte entfernen..." Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" IsEnabled="{Binding IsReadyForRemove}" Click="RemovePointsButton_Click" Grid.Row="4" Height="25" Margin="0,0,5,0"/>
             <GroupBox x:Name="LogFileSelect"
                 Header="Protokolldatei auswählen:" Grid.Row="4">
                 <DockPanel>

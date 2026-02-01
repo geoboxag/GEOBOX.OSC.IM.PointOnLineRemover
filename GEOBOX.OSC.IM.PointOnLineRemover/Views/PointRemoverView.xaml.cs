@@ -39,8 +39,13 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Views
 
         private void RemovePointsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!pointRemoverViewModel.RemovePoints()) return;
+            if (!pointRemoverViewModel.RemovePoints()) 
+            {
+                MessageBox.Show(Properties.Resources.PointRemoverViewModel_RemovePointsWithWarnings, Properties.Resources.genModulName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
+            MessageBox.Show(Properties.Resources.PointRemoverViewModel_RemovePointsSuccess, Properties.Resources.genModulName, MessageBoxButton.OK, MessageBoxImage.Information);
             DialogResult = true;
             MainWindow_Close(sender, e);
         }
@@ -55,6 +60,17 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Views
             pointRemoverViewModel.ChooseLLogFileSavePath();
         }
 
+        // Feature Classes
+        private void FeatureClassesCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            pointRemoverViewModel.CheckIsReadyForRemove();
+        }
+
+        private void FeatureClassesCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            pointRemoverViewModel.CheckIsReadyForRemove();
+        }
+
         private void SelectAllFeatureClassesButton_Click(object sender, RoutedEventArgs e)
         {
             pointRemoverViewModel.SelectAllFeatureClasses();
@@ -63,6 +79,18 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Views
         private void DeselectAllFeatureClassesButton_Click(object sender, RoutedEventArgs e)
         {
             pointRemoverViewModel.DeselectAllFeatureClasses();
+        }
+
+
+        // Coordiantes
+        private void CoodinatesCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            pointRemoverViewModel.CheckIsReadyForRemove();
+        }
+
+        private void CoodinatesCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            pointRemoverViewModel.CheckIsReadyForRemove();
         }
 
         private void SelectAllCoodinatesButton_Click(object sender, RoutedEventArgs e)

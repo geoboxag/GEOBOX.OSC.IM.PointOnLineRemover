@@ -1,4 +1,5 @@
-﻿using Autodesk.Map.IM.Forms;
+﻿using Autodesk.Map.IM.Data;
+using Autodesk.Map.IM.Forms;
 using GEOBOX.OSC.Common.Logging;
 using GEOBOX.OSC.IM.PointOnLineRemover.Controllers;
 using GEOBOX.OSC.IM.PointOnLineRemover.Coordinates;
@@ -97,42 +98,56 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
 
         public bool RemovePoints()
         {
-            // ToDo : Prüfen ist ein Log-Datei ausgewählt, wenn nicht wird eine Datei 
-            if (string.IsNullOrEmpty(CoordinateFilePath))
-            {
-                //document.ApplicationObject.MessageBox("Es wurde kein Ordner ausgewählt!", "Ordner wählen!", System.Windows.Forms.MessageBoxIcon.Information);
-                return false;
-            }
-
-            // ToDo : Prüfen ob Fachschale Job enabled ist oder nicht.
-            // >> Wenn ja und kein Job in Bearbeitung ist - Meldung als MesssageBox anzeigen.
-
             // 1. Wenn drawCADObjects = true und AutoCAD Map 3D offen >> Kreis mit Radius von 10m auf Layer "GEOBOX RemovePoints" erstellen, für jede Koordinate...
             // >> Später wird eine Option für das Setzten der Option auf dem UI erstellt.
             // >> Später wird eine Funktion erstellt, die nur die Punkte zeichnet > für die Prüfung durch den Benutzenden
 
-            // 2. Punkte in den entsprechenden Objektklassen entfernen
-            // Prio 1
-            // >> Linien Objektklassen => Koordinaten als Stützpunkte entfernen (wenn Linienanfangspunkt oder Linienendpunkt, dann nichts machen und eine Logmeldung ausgeben:
-            // Meldung: WRN: Koordinate [X/Y] ist auf der Linie [FID der Linie] in der Objektklasse [FeatureClass-Caption] ein Anfangs- oder Endpunkt. Die Linie wurde nicht geändert.
-            // Bei erfoglreichem entfernen: INF: Koordinate [X/Y] wurde auf der Linie [FID der Linie] in der Objektklasse [FeatureClass-Caption] als Stützpukt entfernt.
-            // Prio 2
-            // >> Punkt Objektklassen => Punkte entfernen (es werden keine Linien gesucht und geändert, nur der Punkt gelöscht)
-            // Bei erfoglreichem entfernen: INF: Koordinate [X/Y] wurde als Punkt [FID des Punktes] in der Objektklasse [FeatureClass-Caption] entfernt.
 
-            var selectedFeatureClasses = FeatureClassDetails.Where(elem => elem.IsSelected).Select(elem => elem.MapFeatureClass);
-            if(selectedFeatureClasses.Count() == 0)
+            // 1. Logger erstellen
+            var logger = CreateNewLogger();
+            logger.WriteInformation($"{Resources.LogMessage_SelectedCoodianteFile}: [{CoordinateFilePath}]");
+
+            // 2. Wenn drawCADObjects = true und AutoCAD Map 3D offen >> Kreis mit Radius von 10m auf Layer "GEOBOX RemovePoints" erstellen, für jede Koordinate...
+            // >> Später wird eine Option für das Setzten der Option auf dem UI erstellt.
+            // >> Später wird eine Funktion erstellt, die nur die Punkte zeichnet > für die Prüfung durch den Benutzenden
+
+            // 3. Punkte in den entsprechenden LINIEN Objektklassen entfernen
+            // Linien Objektklassen => Koordinaten als Stützpunkte entfernen (wenn Linienanfangspunkt oder Linienendpunkt, dann nichts machen)
+            logger.WriteInformation(Resources.LogMessage_StartRemoveFromLineClasses);
+
+            var selectedLineFeatureClasses = GetSelectedLineFeatureClasses();
+            if (selectedLineFeatureClasses != null & selectedLineFeatureClasses.Count() > 0)
             {
-                document.ApplicationObject.MessageBox("Es wurden Objekt-Klassen ausgewählt!", "Objekt-Klassen wählen!", MessageBoxIcon.Information);
-                return false;
+                var linePointsController = new LinePointsController(PointCoordinateDetails.ToList(), logger);
+
+                foreach (var selectedFeatureClass in selectedLineFeatureClasses)
+                {
+                    linePointsController.RemovePointsFromLines(selectedFeatureClass);
+                }
+            }
+            else
+            {
+                logger.WriteInformation(Resources.LogMessage_NoLineClassesSelected);
             }
 
-            var linePointsController = new LinePointsController(PointCoordinateDetails.ToList(), CreateNewLogger());
+            // 4. Punkte in den entsprechenden PUNKT Objektklassen entfernen
+            // Punkt Objektklassen => Punkte entfernen (es werden keine Linien gesucht und geändert, nur der Punkt gelöscht)
+            //logger.WriteInformation(Resources.LogMessage_StartRemoveFromPointClasses);
 
-            foreach (var selectedFeatureClass in selectedFeatureClasses)
-            {
-                linePointsController.RemovePointsFromLines(selectedFeatureClass);
-            }
+            //var selectedPointFeatureClasses = GetSelectedLineFeatureClasses();
+            //if (selectedPointFeatureClasses != null & selectedPointFeatureClasses.Count() > 0)
+            //{
+            //    var pointPointsController = new PointPointsController(PointCoordinateDetails.ToList(), logger);
+
+            //    foreach (var selectedFeatureClass in GetSelectedLineFeatureClasses())
+            //    {
+            //        pointPointsController.RemovePointsFromClasses(selectedFeatureClass);
+            //    }
+            //}
+            //else
+            //{
+            //    logger.WriteInformation(Resources.LogMessage_NoPointClassesSelected);
+            //}
 
             return true;
         }
@@ -189,12 +204,12 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
 
         public void SelectAllCoodinates()
         {
-            ChangeAllChechedOnFeatureClasses(true);
+            ChangeAllChechedOnCoodinates(true);
         }
 
         public void DeselectAllCoodinates()
         {
-            ChangeAllChechedOnFeatureClasses(false);
+            ChangeAllChechedOnCoodinates(false);
         }
 
         private void ChangeAllChechedOnCoodinates(bool selected)
@@ -252,6 +267,17 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
             }
         }
 
+        private IEnumerable<FeatureClass> GetSelectedLineFeatureClasses()
+        {
+            var selectedFeatureClasses = FeatureClassDetails.Where(elem => elem.IsSelected & elem.IsLineFeatureClass).Select(elem => elem.MapFeatureClass);
+            if (selectedFeatureClasses.Count() == 0)
+            {
+                return null;
+            }
+
+            return selectedFeatureClasses;
+        }
+
         public void SelectAllFeatureClasses()
         {
             ChangeAllChechedOnFeatureClasses(true);
@@ -278,7 +304,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.ViewModels
         /// Check are all inputs valid for run remove
         /// Activate or Deactivate RemovePointsButton
         /// </summary>
-        private void CheckIsReadyForRemove()
+        public void CheckIsReadyForRemove()
         {
             if (!HasSelectedFeatureClasses())
             {
