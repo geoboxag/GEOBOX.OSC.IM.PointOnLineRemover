@@ -1,7 +1,9 @@
 using Autodesk.Map.IM.Forms;
 using Autodesk.Map.IM.Forms.Events;
+using GEOBOX.OSC.IM.PointOnLineRemover.Controllers;
 using GEOBOX.OSC.IM.PointOnLineRemover.Properties;
 using GEOBOX.OSC.IM.PointOnLineRemover.Views;
+using System.Windows;
 
 namespace GEOBOX.OSC.IM.PointOnLineRemover.DocumentPlugins
 {
@@ -49,6 +51,12 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.DocumentPlugins
         private void RemovePointsWithListMenuItem_Click(object sender, MenuItemClickEventArgs e)
         {
             Document currentDocument = this.Application.Documents.Active;
+
+            if (JobStateChecker.IsReadyForRun(currentDocument) == false)
+            {
+                MessageBox.Show(Resources.DocumentPlugIn_JobIsNotReadyMessage, Resources.genModulName, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             var pointRemoverView = new PointRemoverView(currentDocument);
             pointRemoverView.ShowDialog();
