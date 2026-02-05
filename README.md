@@ -21,17 +21,17 @@ Der Inhalt sieht wie folgt aus:
 ```json
 [
     {
-        "ID": 260101,
+        "ID": "260101",
         "East": 2652300.094,
         "North": 1260057.89
     },
     {
-        "ID": 260102,
+        "ID": "260102",
         "East": 2660250,
         "North": 1252610.768
     },
     {
-        "ID": 260103,
+        "ID": "260103",
         "East": 2660250.232,
         "North": 1251438.785
     }
@@ -46,4 +46,4 @@ Der Inhalt sieht wie folgt aus:
 
 ### Installation
 - Die DLL ist im AutoCAD Map 3D BIN-Verzeichnis abzulegen.
-- Falls die Datei aus Heruntergeladen wurde, kann eine Sicherheitssperre vom Windows das Ausführen und Verwenden verhindern. In diesem Fall ist in den Eigenschaften der DLL im Abschnitt Sicherheit die CheckBox "Zulassen" zu aktivieren.
+- Falls die Datei aus dem Internet heruntergeladen wurde, kann eine Sicherheitssperre vom Windows das Ausführen und Verwenden verhindern. In diesem Fall ist in den Eigenschaften der DLL im Abschnitt Sicherheit die CheckBox "Zulassen" zu aktivieren.
