@@ -48,6 +48,18 @@
     <Page Remove="Resources\**" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="accoremgd">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\accoremgd.dll</HintPath>
+    </Reference>
+    <Reference Include="Acdbmgd">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\acdbmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="Acmgd">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\acmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AdWindows">
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\AdWindows.dll</HintPath>
+    </Reference>
     <Reference Include="Autodesk.Map.IM.Data">
       <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Data.dll</HintPath>
     </Reference>

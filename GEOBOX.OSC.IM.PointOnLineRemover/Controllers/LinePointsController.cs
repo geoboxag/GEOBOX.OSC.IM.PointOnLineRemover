@@ -12,6 +12,7 @@ using System.Text.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Windows.Documents;
 using GEOBOX.OSC.IM.PointOnLineRemover.Properties;
+using System.Net.WebSockets;
 
 namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
 {
@@ -19,7 +20,7 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
     {
         private readonly ILogger logger;
         private readonly Dictionary<string, PointCoordinateDetail> pointsToRemove;
-        private readonly string pointsToRemoveJson;
+        private readonly List<string> pointsToRemoveJson;
 
         /// <summary>
         /// Contruct with the points to remove and logger
@@ -30,10 +31,27 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
         public LinePointsController(List<PointCoordinateDetail> pointsToRemove, ILogger logger)
         {
             this.logger = logger;
-            pointsToRemoveJson = JsonSerializer.Serialize(pointsToRemove);
+
+            pointsToRemoveJson = new List<string>();
+            CreateBatchedPointsToRemoveJson(pointsToRemove, 50);
 
             // pointsToRemove to dictionary with new key
             this.pointsToRemove = pointsToRemove.ToDictionary(elem => elem.UUID, elem => elem);
+        }
+
+        /// <summary>
+        /// Create multibles JSON String (parameter size in PL/SQL is limited)
+        /// </summary>
+        /// <param name="pointToRemove">Coordinate list</param>
+        /// <param name="batchSize">max entrys for string</param>
+        private void CreateBatchedPointsToRemoveJson(List<PointCoordinateDetail> pointToRemove, int batchSize)
+        {
+            for (int i = 0; i < pointToRemove.Count; i += batchSize)
+            {
+                var batch = pointToRemove.Skip(i).Take(batchSize);
+
+                pointsToRemoveJson.Add(JsonSerializer.Serialize(batch));
+            }
         }
 
         /// <summary>
@@ -123,23 +141,25 @@ namespace GEOBOX.OSC.IM.PointOnLineRemover.Controllers
 
             var featuresWithPoints = new Dictionary<long /* FID */, List<PointCoordinateDetail> /* Points to remove */>();
 
-            using (Command command = new Command(query, connection))
-            {
-                command.Parameters.Add("json_input", pointsToRemoveJson);
-
-                using (DataReader reader = command.ExecuteReader())
+            foreach(var jsonInputString in pointsToRemoveJson) {
+                using (Command command = new Command(query, connection))
                 {
-                    while (reader.Read())
+                    command.Parameters.Add("json_input", jsonInputString);
+
+                    using (DataReader reader = command.ExecuteReader())
                     {
-                        var fid = reader.GetInt64(0);
-                        var idPoint = reader.GetString(1);
+                        while (reader.Read())
+                        {
+                            var fid = reader.GetInt64(0);
+                            var idPoint = reader.GetString(1);
 
-                        // Add feature to the dictionary
-                        if (!featuresWithPoints.ContainsKey(fid))
-                            featuresWithPoints.Add(fid, new List<PointCoordinateDetail>());
+                            // Add feature to the dictionary
+                            if (!featuresWithPoints.ContainsKey(fid))
+                                featuresWithPoints.Add(fid, new List<PointCoordinateDetail>());
 
-                        // Add point to the dictionary
-                        featuresWithPoints[fid].Add(pointsToRemove[idPoint]);
+                            // Add point to the dictionary
+                            featuresWithPoints[fid].Add(pointsToRemove[idPoint]);
+                        }
                     }
                 }
             }
