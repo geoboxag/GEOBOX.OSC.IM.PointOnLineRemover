@@ -21,13 +21,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Admin|x64'">
     <Deterministic>False</Deterministic>
-    <OutputPath>..\..\..\..\Program Files\Autodesk\Infrastructure Administrator for AutoCAD Map 3D 2025\bin\</OutputPath>
+    <OutputPath>..\..\..\..\Program Files\Autodesk\Infrastructure Administrator for AutoCAD Map 3D 2026\bin\</OutputPath>
     <DebugType>full</DebugType>
     <NoWarn>1701;1702;CA1416</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Map|x64'">
     <Deterministic>False</Deterministic>
-    <OutputPath>..\..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\</OutputPath>
+    <OutputPath>..\..\..\..\Program Files\Autodesk\AutoCAD 2026\Map\bin\</OutputPath>
     <DebugType>full</DebugType>
     <NoWarn>1701;1702;CA1416</NoWarn>
   </PropertyGroup>
@@ -49,39 +49,39 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\accoremgd.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\accoremgd.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
     <Reference Include="Acdbmgd">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\acdbmgd.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\acdbmgd.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
     <Reference Include="Acmgd">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\acmgd.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\acmgd.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="AdWindows">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\AdWindows.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\AdWindows.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
     <Reference Include="Autodesk.Map.IM.Data">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Data.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\Map\bin\Autodesk.Map.IM.Data.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
     <Reference Include="Autodesk.Map.IM.Forms">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Forms.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\Map\bin\Autodesk.Map.IM.Forms.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
     <Reference Include="Autodesk.Map.IM.Genuine">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Genuine.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\Map\bin\Autodesk.Map.IM.Genuine.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
     <Reference Include="Autodesk.Map.IM.Graphic">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\Autodesk.Map.IM.Graphic.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\Map\bin\Autodesk.Map.IM.Graphic.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2025\Map\bin\log4net.dll</HintPath>
+      <HintPath>..\..\..\Program Files\Autodesk\AutoCAD 2026\Map\bin\log4net.dll</HintPath>
 	  <Private>false</Private>		
     </Reference>
   </ItemGroup>

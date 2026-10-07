@@ -40,8 +40,8 @@ Der Inhalt sieht wie folgt aus:
 
 ## Voraussetzungen und Installation
 ### Voraussetzung
-- Autodesk AutoCAD Map 3D 2025 (2025.0.3)
-- GEOBOX GIS Amtliche Vermessung
+- Autodesk AutoCAD Map 3D 2026 (2026.0.4)
+- GEOBOX GIS Amtliche Vermessung DM01
 - Microsoft .NET Framework 10
 
 ### Installation
