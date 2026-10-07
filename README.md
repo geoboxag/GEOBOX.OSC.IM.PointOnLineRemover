@@ -40,10 +40,10 @@ Der Inhalt sieht wie folgt aus:
 
 ## Voraussetzungen und Installation
 ### Voraussetzung
-- Autodesk AutoCAD Map 3D 2025
+- Autodesk AutoCAD Map 3D 2025 (2025.0.3)
 - GEOBOX GIS Amtliche Vermessung
-- Microsoft .NET Framework 8
+- Microsoft .NET Framework 10
 
 ### Installation
-- Die DLL ist im AutoCAD Map 3D BIN-Verzeichnis abzulegen.
+- Die DLL und das TBP ist im AutoCAD Map 3D BIN-Verzeichnis abzulegen.
 - Falls die Datei aus dem Internet heruntergeladen wurde, kann eine Sicherheitssperre vom Windows das Ausführen und Verwenden verhindern. In diesem Fall ist in den Eigenschaften der DLL im Abschnitt Sicherheit die CheckBox "Zulassen" zu aktivieren.
