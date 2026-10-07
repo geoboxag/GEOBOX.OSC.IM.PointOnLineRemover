@@ -2,19 +2,19 @@
   "profiles": {
     "Debug-Map": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2026\\acad.exe",
+      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2027\\acad.exe",
       "commandLineArgs": "/product MAP /language \"de-DE\"",
-      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2026\\UserDataCache\\"
+      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2027\\UserDataCache\\"
     },
     "Debug-Admin": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Autodesk\\Infrastructure Administrator for AutoCAD Map 3D 2026\\bin\\Autodesk.InfrastructureAdministrator.exe",
-      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2026\\UserDataCache\\"
+      "executablePath": "C:\\Program Files\\Autodesk\\Infrastructure Administrator for AutoCAD Map 3D 2027\\bin\\Autodesk.InfrastructureAdministrator.exe",
+      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2027\\UserDataCache\\"
     },
     "Debug-MDEditor": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2026\\Map\\bin\\Autodesk.IndustryModelDataEditor.exe",
-      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2026\\UserDataCache\\"
+      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2027\\Map\\bin\\Autodesk.IndustryModelDataEditor.exe",
+      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2027\\UserDataCache\\"
     }
   }
 }
